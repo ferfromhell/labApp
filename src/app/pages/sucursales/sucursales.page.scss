@@ -1,0 +1,39 @@
+ion-content {
+  #map {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 150ms ease-in;
+    display: block;
+    &.show-map{
+      opacity: 1;
+    }
+  }
+}
+
+.labels {
+    color: red;
+    background-color: white;
+    font-family: "Lucida Grande", "Arial", sans-serif;
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+    width: 60px;
+    border: 2px solid black;
+    white-space: nowrap;
+}
+
+
+.my-custom-class-for-label {
+  width: 50px;
+  height: 20px;
+
+  border: 1px solid #eb3a44;
+  border-radius: 5px;
+  background: #fee1d7;
+  text-align: center;
+  line-height: 20px;
+  font-weight: bold;
+  font-size: 14px;
+  color: #eb3a44;
+}

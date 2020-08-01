@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Modificar mi cuenta</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="dismiss()">
+        Cerrar
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <form #updateForm="ngForm" (ngSubmit)="modificacion(updateForm)">
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating" >
+          Nombre
+        </ion-label>
+        <ion-input [(ngModel)]="user.nombre" value="{{identity.nombres}}" name=nombre required>
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">
+          Apellido Paterno
+        </ion-label>
+        <ion-input [(ngModel)]="user.app" value="{{identity.apellido_paterno}}" name="app" required>
+
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">
+          Apellido Materno
+        </ion-label>
+        <ion-input [(ngModel)]="user.apm" value="{{identity.apellido_materno}}" name="apm" required>
+
+        </ion-input>
+      </ion-item>
+      <!-- <ion-item>
+        <ion-label position="floating">
+          Sexo
+        </ion-label>
+        <ion-select compareWith="{{identity.genero}}" value="{{identity.genero}}" name="genero" [(ngModel)]="user.genero" required>
+              <ion-select-option value="Femenino" >Femenino</ion-select-option>
+              <ion-select-option value="Masculino">Masculino</ion-select-option>
+        </ion-select>
+      </ion-item> -->
+
+      <ion-item>
+        <ion-label  position="floating">
+          Correo Electrónico
+        </ion-label>
+        <ion-input name="email" value="{{identity.correo}}" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" [(ngModel)]="user.correo" required>
+
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label  position="floating">
+          Teléfono
+        </ion-label>
+        <ion-input name="telefono" value="{{identity.telefono}}" type="number" [(ngModel)]="user.telefono" required>
+
+        </ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-button type="submit"
+                      shape="round"
+                      expand="full"
+                      >
+            Modificar
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+
+</ion-content>

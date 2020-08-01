@@ -1,0 +1,92 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Tu carrito</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-card>
+    <ion-item color="primary">
+      <ion-icon name="map-outline" slot="start"></ion-icon>
+      <ion-label>Dirección</ion-label>
+      <ion-button fill="clear" slot="end" color=light (click)="presentModal()">
+        <ion-icon name="add-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+
+    <ion-card-content>
+      <ion-list>
+          <ion-label>Direcciones </ion-label>
+          <ion-select (ionChange)="checkValue($event)" okText="Aceptar" cancelText="Cancelar" >
+            <ion-select-option   *ngFor="let item of direcciones; let i = index" value="{{i}}">{{item.direccion}}</ion-select-option>
+          </ion-select>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-content>
+      <ion-label color="primary" (click)="prueba()">
+        Estudios
+      </ion-label>
+      <ion-list *ngIf="estudios_html.length  > 0">
+        <ion-item-sliding  *ngFor="let item of estudios_html">
+          <ion-item >
+            <ion-icon name="body-outline" slot="start"></ion-icon>
+            <ion-label>
+                {{item.estudio.nombre}}
+                <p>{{item.estudio.costo | currency}}.</p>
+            </ion-label>
+            <ion-button slot="end" fill="clear" [routerLink]="['/estudio',item.id_estudio]">
+              <ion-icon name="eye-outline"></ion-icon>
+            </ion-button>
+          </ion-item>
+          <ion-item-options side="end">
+            <ion-item-option (click)="delete_estudio(item)" color="danger">
+              <ion-icon name="trash-outline"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="12" class="text">
+              Subtotal {{subtotal | currency}}
+            </ion-col>
+
+
+          </ion-row>
+          <ion-row>
+            <ion-col size="5">
+              <ion-button size="small" (click)="prueba()">
+                Calcular Total
+              </ion-button>
+            </ion-col>
+            <ion-col size="7" class="text">
+              <p>{{total_pago}}</p>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-col size="12">
+                <ion-button color="success" expand="block" size="small" (click)="confirmarPedido()">
+                  Confirmar Solicitud
+                </ion-button>
+              </ion-col>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-list>
+      <ion-item *ngIf="estudios_html.length == 0">
+        <p>No hay estudios en el carrito...</p>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

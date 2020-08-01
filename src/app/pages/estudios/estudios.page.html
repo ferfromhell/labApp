@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Estudios </ion-title>
+    <!-- <ion-avatar slot="end" padding>
+      <img class="logo" src="assets/user.png">
+    </ion-avatar> -->
+    <ion-buttons slot="end" >
+      <ion-button color="primary" routerLink="/carrito">
+        <ion-icon name="cart-outline" >5</ion-icon>
+          <ion-badge color="danger" *ngIf="stack != 0">{{stack}}</ion-badge>
+      </ion-button>
+
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-searchbar animated
+    (ionChange)="buscar($event)"
+  >
+
+  </ion-searchbar>
+
+    <ion-list #lista>
+      <ion-item-sliding *ngFor="let item of estudios">
+        <ion-item [routerLink]="['/estudio',item.id]" detail>
+          <ion-icon name="flask-outline" slot="start" color="primary"></ion-icon>
+          <ion-label>
+            <h3>{{item.nombre}}</h3>
+            <p>{{item.descripcion}}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option (click)="agregar_carrito(item)">
+            <ion-icon slot="icon-only" name="cart-outline"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+
+    <ion-infinite-scroll threshold="80px" (ionInfinite)="loadData($event)">
+      <ion-infinite-scroll-content
+        loadingSpinner="crescent"
+        loadingText="Cargando más estudios...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

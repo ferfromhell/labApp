@@ -1,0 +1,35 @@
+<!-- home.page.html -->
+<ion-header [translucent]="true">
+
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button>
+
+      </ion-back-button>
+    </ion-buttons>
+      <ion-title></ion-title>
+    <!-- <ion-buttons slot="end">
+      <ion-button (click)="loadMap()">
+        <ion-icon  name="locate"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+    <ion-avatar slot="end" class="imagen_perfil"  routerLink="/tabs/cuenta">
+      <img *ngIf="identity.imagen_perfil" src="{{identity.imagen_perfil}}">
+      <img *ngIf="!identity.imagen_perfil" src="https://ac-labs.com.mx/rest/estudio_rest/public/img/user.png" alt="">
+    </ion-avatar>
+
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div class="map-wrapper">
+    <div #map id="map"></div>
+  </div>
+
+
+</ion-content>

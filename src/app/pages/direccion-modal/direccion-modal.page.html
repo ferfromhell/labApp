@@ -1,0 +1,104 @@
+<ion-header>
+
+  <ion-toolbar color="primary">
+    <ion-title>Agregar Dirección</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="dismiss()">
+        Cerrar
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content  [hidden]="confirm=='Si'">
+    <!-- <ion-fab vertical="bottom" horizontal="start" slot="fixed" [hidden]="confirm=='No'">
+      <ion-fab-button  (click)="loadMap()" ion-fab color="tertiary">
+        <ion-icon name="locate"></ion-icon>
+      </ion-fab-button>
+    </ion-fab> -->
+    <!-- fab placed to the top end -->
+    <ion-searchbar  [(ngModel)]="autocomplete.input" (ionInput)="UpdateSearchResults()" placeholder="Busca tu ubicacion"  (ionClear)="ClearAutocomplete()"></ion-searchbar>
+    <ion-list [hidden]="autocompleteItems.length == 0" [hidden]="confirm=='Si'">
+      <ion-item *ngFor="let item of autocompleteItems" (click)="SelectSearchResult(item)">
+        <ion-icon name="locate-outline" slot="start"></ion-icon>
+
+          <div>
+            <h6>{{item.name}} </h6>
+            <p>{{ item.formatted_address }}</p>
+         </div>
+
+      </ion-item>
+    </ion-list>
+
+    <div class="map-wrapper" style="height: 70%;" [hidden]="confirm=='Si'">
+      <div #map id="map"  style="height: 100%;"></div>
+    </div>
+    <ion-grid style="height: 20%;">
+      <ion-row>
+        <ion-col size="12" class="text_center">
+          <h4>Confirma la dirección de llegada</h4>
+          <p>{{address}}</p>
+        </ion-col>
+        <ion-col size="12">
+          <ion-button (click)="ShowCords()" expand="full" [disabled]="lat==undefined">
+            Confirmar ubicación
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+</ion-content>
+
+<ion-content  [hidden]="confirm=='No' || confirm=='coordenadas'">
+  <h6 class="ion-text-center">
+    Detalles para acudir a la toma de muestra
+  </h6>
+  <ion-list>
+   <form #direccionForm="ngForm" (ngSubmit)="registro_direccion(direccionForm)">
+     <ion-item>
+       <ion-label position="floating">
+         Dirección
+       </ion-label>
+       <ion-input name="direccion" value="{{address}}" required [(ngModel)]="direccion.direccion"> </ion-input>
+     </ion-item>
+     <ion-item>
+       <ion-label position="floating">
+         Numero Ext.
+       </ion-label>
+       <ion-input name="exterior" [(ngModel)]="direccion.exterior" type="number" required> </ion-input>
+     </ion-item>
+     <ion-item>
+       <ion-label position="floating">
+         Numero Int.
+       </ion-label>
+       <ion-input name="interior" [(ngModel)]="direccion.interior" type="number" value="000" > </ion-input>
+     </ion-item>
+     <ion-item>
+       <ion-label position="floating">
+         Colonia
+       </ion-label>
+       <ion-input required name="colonia" [(ngModel)]="direccion.colonia"> </ion-input>
+     </ion-item>
+     <ion-item>
+       <ion-label position="floating">
+         Codigo Postal
+       </ion-label>
+       <ion-input required name="cp" [(ngModel)]="direccion.cp" maxlength="5" minlength="5" type="tel"> </ion-input>
+     </ion-item>
+     <ion-grid>
+       <ion-row>
+         <ion-col>
+           <ion-button type="submit"
+                       shape="round"
+                       expand="full"
+                       [disabled]="direccionForm.invalid"
+                       >
+             Registrar
+           </ion-button>
+         </ion-col>
+       </ion-row>
+     </ion-grid>
+     
+   </form>
+
+ </ion-list>
+</ion-content>

@@ -1,0 +1,25 @@
+ion-slide{
+  display: block;
+  margin-top: 5rem;
+}
+img{
+  max-height: 400px;
+}
+.slide_img{
+  padding: 40px;
+}
+h3{
+  font-size: 27px;
+  font-weight: 100;
+  color: #407bff;
+}
+.boton{
+  margin-bottom: 40px;
+}
+
+
+@media screen and (max-height: 775px) {
+  img{
+    width: 70%;
+  }
+}

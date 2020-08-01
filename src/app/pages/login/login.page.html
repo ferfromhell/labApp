@@ -1,0 +1,89 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-slides class="mainSlide" #slidePrincipal>
+    <ion-slide >
+      <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+        <ion-grid fixed>
+
+              <img src="/assets/descarga.png">
+
+          <ion-row>
+            <ion-col>
+
+                <ion-list>
+
+                  <ion-item>
+                    <ion-label position="floating">Correo</ion-label>
+                    <ion-input [autocomplete]="'off'"
+                                name="email"
+                                type="email"
+                                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                                [(ngModel)]="user.correo"
+                                required></ion-input>
+                  </ion-item>
+
+                  <ion-item>
+                    <ion-label position="floating">Contraseña</ion-label>
+                    <ion-input name="password"
+                                type="password"
+                                [(ngModel)]="user.password"
+
+                                required></ion-input>
+                  </ion-item>
+
+                </ion-list>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <ion-button type="submit"
+                          color="tertiary"
+                          shape="round"
+                          class="input_login"
+                          [disabled]="loginForm.invalid"
+                          *ngIf="!loading">
+                Iniciar Sesión
+              </ion-button>
+              <ion-spinner color="primary" *ngIf="loading"></ion-spinner>
+            </ion-col>
+          </ion-row>
+
+        </ion-grid>
+      </form>
+    </ion-slide>
+  </ion-slides>
+</ion-content>
+
+<ion-footer no-border >
+  <ion-toolbar >
+    <ion-row>
+      <ion-col>
+          <ion-button shape="round"
+                      expand="full"
+                      size="small"
+
+                      color="tertiary" >
+            Ingresar
+          </ion-button>
+      </ion-col>
+
+      <ion-col>
+        <ion-button shape="round"
+                    expand="full"
+                    size="small"
+                    fill="outline"
+                    color="tertiary" [routerLink]="['/registro']">
+          Registrate
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+
+
+  </ion-toolbar>
+</ion-footer>

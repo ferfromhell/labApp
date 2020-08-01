@@ -1,0 +1,120 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-title>Registro</ion-title>
+  </ion-toolbar>
+</ion-header>
+    <ion-content>
+      <ion-slides #slidePrincipal>
+        <ion-slide>
+          <ion-grid fixed>
+
+                <form #registerForm="ngForm" (ngSubmit)="registro(registerForm)" autocomplete="off">
+                  <ion-row>
+                    <ion-col size="12">
+                      <h2>Identifícate</h2>
+
+                    </ion-col>
+                  </ion-row>
+                    <ion-row>
+                        <ion-col>
+
+                            <ion-list>
+
+                                <ion-item>
+                                <ion-label position="floating">Nombre</ion-label>
+                                <ion-input name="nombre"
+                                            type="text"
+                                              [(ngModel)]="user.nombre"
+                                            required></ion-input>
+                                </ion-item>
+
+                                <ion-item>
+                                <ion-label position="floating">Apellido Paterno</ion-label>
+                                <ion-input name="app"
+                                            type="text"
+                                              [(ngModel)]="user.app"
+
+                                            required></ion-input>
+                                </ion-item>
+                                <ion-item>
+                                <ion-label position="floating">Apellido Materno</ion-label>
+                                <ion-input name="apm"
+                                            type="text"
+                                            [(ngModel)]="user.apm"
+
+                                            required></ion-input>
+                                </ion-item>
+                                <ion-item>
+                                <ion-label position="floating">Teléfono</ion-label>
+                                <ion-input name="telefono"
+                                            type="tel"
+                                            minlength="10"
+                                            [(ngModel)]="user.telefono"
+                                            maxlength=10
+                                            required></ion-input>
+                                </ion-item>
+                                <ion-item>
+                                <ion-label position="floating">Correo</ion-label>
+                                <ion-input name="email"
+                                            type="email"
+                                            [(ngModel)]="user.correo"
+                                            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                                            autocomplete="off"
+                                            required></ion-input>
+                                </ion-item>
+                                <ion-item>
+                                <ion-label position="floating">Contraseña</ion-label>
+                                <ion-input name="password"
+                                            minlength="8"
+                                            type="password"
+                                            [(ngModel)]="user.password"
+                                            required></ion-input>
+                                </ion-item>
+
+                            </ion-list>
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                    <ion-col>
+                        <ion-button type="submit"
+                                    color="tertiary"
+                                    shape="round"
+                                    [disabled]="registerForm.invalid" *ngIf="loading==false"  >
+                            Crear usuario
+                        </ion-button>
+                        <ion-spinner color="primary" *ngIf="loading"></ion-spinner>
+                    </ion-col>
+                </ion-row>
+
+                </form>
+            </ion-grid>
+
+
+          </ion-slide>
+      </ion-slides>
+    </ion-content>
+
+    <ion-footer no-border>
+      <ion-toolbar>
+        <ion-row>
+          <ion-col>
+              <ion-button shape="round"
+                          expand="full"
+                          size="small"
+                          fill="outline"
+                          color="tertiary" [routerLink]="['/login']">
+                Ingresar
+              </ion-button>
+          </ion-col>
+
+          <ion-col>
+            <ion-button shape="round"
+                        expand="full"
+                        size="small"
+
+                        color="tertiary">
+              Registrate
+            </ion-button>
+          </ion-col>
+        </ion-row>

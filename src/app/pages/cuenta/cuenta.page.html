@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Mi Cuenta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+<ion-grid>
+  <ion-row>
+    <ion-col>
+      <ion-item detail routerLink="/configuracion">
+        <ion-avatar slot="start">
+          <img *ngIf="image != null" src="{{image}}">
+          <img *ngIf="image == null" src="assets/3609911.jpg" alt="">
+        </ion-avatar>
+        <ion-label>
+          <h3> {{identity.nombres}}  {{identity.apellido_paterno}} {{identity.apellido_materno}}</h3>
+          <h5 color="primary">Ver Cuenta</h5>
+        </ion-label>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <!-- <ion-row>
+    <ion-col>
+      <ion-item detail routerLink="/direccion">
+        <ion-icon slot="start" name="location-outline"></ion-icon>
+        <ion-label>
+                  <h3>Ver direcciones</h3>
+        </ion-label>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  -->
+  <ion-row>
+    <ion-col>
+      <ion-item detail routerLink="/nosotros">
+        <ion-icon name="medical-outline" slot="start"></ion-icon>
+        <ion-label>
+                  <h3>¿Quiénes somos?</h3>
+        </ion-label>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-item detail routerLink="/sucursales">
+        <ion-icon name="location-outline" slot="start"></ion-icon>
+        <ion-label>
+                  <h3>Sucursales</h3>
+        </ion-label>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-item detail (click)="log_out()">
+        <ion-icon name="log-out-outline" slot=start></ion-icon>
+        <ion-label>
+                  <h3>Cerrar Sesión</h3>
+        </ion-label>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+</ion-content>

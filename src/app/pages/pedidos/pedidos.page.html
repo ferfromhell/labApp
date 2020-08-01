@@ -1,0 +1,163 @@
+<ion-toolbar>
+  <ion-segment (ionChange)="segmentChanged($event)" color="success" value="pendientes">
+    <ion-segment-button value="anteriores">
+      Anteriores
+    </ion-segment-button>
+    <ion-segment-button value="pendientes">
+      Pendientes
+    </ion-segment-button>
+  </ion-segment>
+</ion-toolbar>
+
+
+<!-- <ion-content *ngIf="pedidos.length == 0 ">
+  <ion-item >Cargando...</ion-item>
+
+</ion-content> -->
+<ion-content >
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <!-- <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink="/carrito" color="success">
+    <ion-icon name="cart-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab> -->
+
+
+<div *ngIf="segment == 'pendientes'">
+  <div *ngIf="pedidos.length==0">
+    <img src="assets/2665817.jpg" alt="">
+    <ion-text color="primary message">
+      <h3 class="text_font">No hay estudios pendientes</h3>
+    </ion-text>
+  </div>
+
+  <ion-card  *ngFor="let pedido of pedidos" >
+    <ion-item color="primary" class="ion-no-margin">
+      <ion-avatar slot="start" no-border>
+        <img src="assets/asesores.png">
+      </ion-avatar>
+      <ion-label>
+        Solicitud {{pedido.estatus}}
+        <p class="date">{{pedido.created_at | date:'dd-MM-yyyy'}}</p>
+       </ion-label>
+      <ion-icon *ngIf="pedido.estatus == 'Pendiente'" name="checkmark-circle-outline" slot="end" color="danger"></ion-icon>
+            <ion-icon *ngIf="pedido.estatus == 'Asignada'" name="checkmark-circle-outline" slot="end" color="warning"></ion-icon>
+    </ion-item>
+
+    <ion-card-content>
+      <ion-item *ngFor="let estudio of pedido.estudios">
+        <ion-label class="estudio">
+          {{estudio.nombre}}
+        </ion-label>
+      </ion-item>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col class="ion-padding-top">
+            <ion-label>
+
+              Responsable toma de muestra:
+            </ion-label>
+            <p *ngIf="pedido.personal_nombre">
+              {{pedido.personal_nombre}}
+            </p>
+            <p *ngIf="!pedido.personal_nombre">
+              No hay responsable asignado
+            </p>
+          </ion-col>
+
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-label>
+            Total: {{pedido.costo | currency}}
+            </ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="pedido.estatus == 'Asignada'">
+          <ion-col size="12">
+            <p>Fecha de la toma: {{pedido.fecha_visita}}</p>
+            <p>Hora: {{ pedido.hora_visita}}</p>
+          </ion-col>
+          <ion-col>
+            <ion-label>
+              <p color="success">No se aceptan propinas</p>
+            </ion-label>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+    </ion-card-content>
+  </ion-card>
+</div>
+
+<div *ngIf="segment == 'anteriores'">
+
+  <div *ngIf="anteriores.length==0">
+    <img src="assets/3411092.jpg" alt="">
+    <ion-text color="primary message">
+      <h3 class="text_font">No hay estudios anteriores</h3>
+    </ion-text>
+  </div>
+
+  <ion-card  *ngFor="let pedido of anteriores" >
+    <img src="https://ac-labs.com.mx/rest/estudio_rest/public/img/medical.jpg" alt="">
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="2">
+            <ion-icon size="large" name="checkmark-circle-outline" color="success"></ion-icon>
+          </ion-col>
+          <ion-col size="10">
+            <ion-label>
+              Solicitud {{pedido.estatus}}
+              <p class="date">{{pedido.created_at | date:'dd-MM-yyyy'}}</p>
+             </ion-label>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <ion-grid class="estudios">
+        <ion-row>
+          <ion-col *ngFor="let estudio of pedido.estudios" size="12">
+            <ion-label class="estudio">
+             1 - {{estudio.nombre}}
+            </ion-label>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col class="ion-padding-top">
+            <ion-label>
+
+              Responsable toma de mustra:
+            </ion-label>
+            <p *ngIf="pedido.personal_nombre">
+              {{pedido.personal_nombre}}
+            </p>
+            <p *ngIf="!pedido.personal_nombre">
+              No hay responsable asignado
+            </p>
+          </ion-col>
+
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <ion-label>
+            Total: {{pedido.costo | currency}}
+            </ion-label>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-button size="small" fill="clear" (click)="comentarios(pedido.id)">
+        Comentar Pedido
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+</div>
+
+</ion-content>

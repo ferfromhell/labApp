@@ -1,0 +1,92 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Configuración</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-thumbnail class="border_r">
+            <img *ngIf="result != null" class="imagen" [src]="result">
+            <img *ngIf="result == null" class="imagen" src="assets/3609911.jpg" >
+          </ion-thumbnail>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
+    <ion-card-content>
+      <ion-list>
+        <ion-item >
+          <ion-label>
+            <h4>Nombre</h4>
+            <h6> {{identity.nombres}}  {{identity.apellido_paterno}} {{identity.apellido_materno}}</h6>
+          </ion-label>
+        </ion-item>
+        <ion-item >
+          <ion-label>
+            <h4>Número de teléfono</h4>
+            <h6> {{identity.telefono}}</h6>
+          </ion-label>
+        </ion-item>
+        <ion-item >
+          <ion-label>
+            <h4>Correo Electrónico</h4>
+            <h6> {{identity.correo}}</h6>
+          </ion-label>
+        </ion-item>
+        <ion-item (click)="cambiar()" detail>
+          <ion-label>
+            <h4>Contraseña</h4>
+            <h6> **********</h6>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+      <ion-grid [hidden]="contrasena==false">
+        <ion-row>
+          <ion-col>
+            <ion-item>
+               <ion-label position="floating">Contraseña Actual</ion-label>
+              <ion-input type="password" [(ngModel)]="actual" required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Nueva Contraseña</ion-label>
+              <ion-input type="password" [(ngModel)]="nueva" required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Repetir Contraseña</ion-label>
+              <ion-input type="password" [(ngModel)]="repetir"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12">
+            <ion-button size="small" (click)="password_update()">
+              Guardar
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-buttons>
+        <ion-button (click)="update()" slot="start">
+          Modificar
+        </ion-button>
+        <ion-button (click)=image()>
+          Seleccionar foto
+        </ion-button>
+
+        <!-- <ion-button (click)="camara()" slot="end">
+          Camara
+        </ion-button> -->
+      </ion-buttons>
+    </ion-card-content>
+  </ion-card>
+
+
+</ion-content>

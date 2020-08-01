@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-buttons (click)="openFirst()">
+        <ion-icon name="menu-outline" size="large"></ion-icon>
+      </ion-buttons>
+    </ion-buttons>
+    <ion-title>Noticias </ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink="/carrito" color="success">
+    <ion-icon name="cart-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div *ngIf="noticias && noticias.length > 0">
+    <ion-card *ngFor="let noticia of noticias">
+      <ion-item class="ion-no-margin">
+        <ion-avatar slot="start">
+          <img src="https://ac-labs.com.mx/rest/estudio_rest/public/img/asesores.png">
+        </ion-avatar>
+        <ion-label>
+          Asesores Diagnóstico Clínico
+         </ion-label>
+      </ion-item>
+      <img src="https://ac-labs.com.mx/LabHome/storage/app/noticias/{{noticia.imagen}}" width="100%" *ngIf="noticia.tipo == 'Imagen'">
+      <video *ngIf="noticia.tipo == 'Video'" src="https://ac-labs.com.mx/LabHome/storage/app/noticias/{{noticia.imagen}}" width="100%"  height=240 controls>
+        </video>
+      <ion-card-content>
+        <p *ngIf="noticia.referencias"><a href="{{noticia.referencias}}">{{noticia.referencias}}</a></p>
+        {{noticia.descripcion}}
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+</ion-content>
